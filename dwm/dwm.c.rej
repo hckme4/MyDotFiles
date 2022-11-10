@@ -1,0 +1,21 @@
+--- dwm.c
++++ dwm.c
+@@ -706,6 +716,9 @@ dirtomon(int dir)
+ void
+ drawbar(Monitor *m)
+ {
++	if (usealtbar)
++		return;
++
+ 	int x, w, tw = 0;
+ 	int boxs = drw->fonts->h / 9;
+ 	int boxw = drw->fonts->h / 6 + 2;
+@@ -1579,7 +1615,7 @@ setup(void)
+ 	if (!drw_fontset_create(drw, fonts, LENGTH(fonts)))
+ 		die("no fonts could be loaded.");
+ 	lrpad = drw->fonts->h;
+-	bh = drw->fonts->h + 2;
++	bh = usealtbar ? 0 : drw->fonts->h + 2;
+ 	updategeom();
+ 	/* init atoms */
+ 	utf8string = XInternAtom(dpy, "UTF8_STRING", False);
